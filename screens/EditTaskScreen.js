@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, StatusBar } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, StatusBar } from 'react-native';
 import { ThemeContext } from '../context/ThemeContext';
 
 const EditTaskScreen = ({ route, navigation }) => {
@@ -35,7 +35,9 @@ const EditTaskScreen = ({ route, navigation }) => {
                 onChangeText={setDescription}
                 multiline
             />
-            <Button title="Зберегти" onPress={handleSave} />
+            <TouchableOpacity style={[styles.button, isDarkMode && styles.darkButton]} onPress={handleSave}>
+                <Text style={styles.buttonText}>Зберегти</Text>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -47,6 +49,17 @@ const styles = StyleSheet.create({
     darkText: { color: '#fff' },
     input: { borderWidth: 1, padding: 8, marginBottom: 10, borderColor: '#ccc', color: '#000' },
     darkInput: { borderColor: '#555', color: '#fff' },
+    button: {
+        backgroundColor: '#007bff',
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 5,
+    },
+    darkButton: { backgroundColor: '#555' },
+    buttonText: { color: '#fff', fontWeight: 'bold' },
 });
 
 export default EditTaskScreen;

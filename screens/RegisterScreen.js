@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, StatusBar } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, StatusBar } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ThemeContext } from '../context/ThemeContext';
 
@@ -20,7 +20,6 @@ const RegisterScreen = ({ navigation }) => {
 
     return (
         <View style={[styles.container, isDarkMode && styles.darkContainer]}>
-            {/* Змінюємо колір тексту статусу */}
             <StatusBar
                 barStyle={isDarkMode ? 'light-content' : 'dark-content'}
                 backgroundColor={isDarkMode ? '#333' : '#fff'}
@@ -41,7 +40,9 @@ const RegisterScreen = ({ navigation }) => {
                 onChangeText={setPassword}
                 secureTextEntry
             />
-            <Button title="Зареєструватися" onPress={handleRegister} />
+            <TouchableOpacity style={[styles.button, isDarkMode && styles.darkButton]} onPress={handleRegister}>
+                <Text style={styles.buttonText}>Зареєструватися</Text>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -53,6 +54,17 @@ const styles = StyleSheet.create({
     darkText: { color: '#fff' },
     input: { borderWidth: 1, padding: 8, marginBottom: 10, borderColor: '#ccc', color: '#000' },
     darkInput: { borderColor: '#555', color: '#fff' },
+    button: {
+        backgroundColor: '#007bff',
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 5,
+    },
+    darkButton: { backgroundColor: '#555' },
+    buttonText: { color: '#fff', fontWeight: 'bold' },
 });
 
 export default RegisterScreen;

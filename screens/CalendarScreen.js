@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, TouchableOpacity, FlatList, StyleSheet, Button } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
 import { getCalendarDays } from '../utils/calendarUtils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ThemeContext } from '../context/ThemeContext';
@@ -95,11 +95,17 @@ const CalendarScreen = ({ navigation }) => {
                     );
                 }}
             />
-            <TouchableOpacity style={[styles.todayButton, isDarkMode && styles.darkTodayButton]} onPress={handleToday}>
-                <Text style={styles.todayText}>Сьогодні</Text>
-            </TouchableOpacity>
-            <Button title="Вийти" onPress={handleLogout} />
-            <Button title={isDarkMode ? "Світла тема" : "Темна тема"} onPress={toggleTheme} />
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity style={[styles.button, isDarkMode && styles.darkButton]} onPress={handleToday}>
+                    <Text style={styles.buttonText}>Сьогодні</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[styles.button, isDarkMode && styles.darkButton]} onPress={handleLogout}>
+                    <Text style={styles.buttonText}>Вийти</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[styles.button, isDarkMode && styles.darkButton]} onPress={toggleTheme}>
+                    <Text style={styles.buttonText}>{isDarkMode ? "Світла тема" : "Темна тема"}</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };
@@ -122,9 +128,18 @@ const styles = StyleSheet.create({
     darkCurrentMonthText: { color: '#fff' },
     darkOtherMonthText: { color: '#aaa' },
     today: { backgroundColor: '#f00', borderRadius: 20 },
-    todayButton: { padding: 10, backgroundColor: '#007bff', marginTop: 10, alignItems: 'center' },
-    darkTodayButton: { backgroundColor: '#555' },
-    todayText: { color: '#fff', fontWeight: 'bold' },
+    buttonContainer: { flexDirection: 'row', justifyContent: 'space-around', marginTop: 10 },
+    button: {
+        backgroundColor: '#007bff',
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginHorizontal: 5,
+    },
+    darkButton: { backgroundColor: '#555' },
+    buttonText: { color: '#fff', fontWeight: 'bold' },
     dot: { width: 6, height: 6, borderRadius: 3, backgroundColor: '#007bff', position: 'absolute', bottom: 5 },
 });
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, TextInput, Button, FlatList, TouchableOpacity, StyleSheet, StatusBar } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet, StatusBar } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ThemeContext } from '../context/ThemeContext';
 
@@ -90,7 +90,9 @@ const TaskScreen = ({ route, navigation }) => {
                 value={newTask}
                 onChangeText={setNewTask}
             />
-            <Button title="Додати" onPress={addTask} />
+            <TouchableOpacity style={[styles.button, isDarkMode && styles.darkButton]} onPress={addTask}>
+                <Text style={styles.buttonText}>Додати</Text>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -107,6 +109,17 @@ const styles = StyleSheet.create({
     taskText: { fontSize: 16, color: '#000' },
     taskDescription: { fontSize: 14, color: '#666', marginTop: 5 },
     deleteButton: { color: 'red', marginTop: 10 },
+    button: {
+        backgroundColor: '#007bff',
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 5,
+    },
+    darkButton: { backgroundColor: '#555' },
+    buttonText: { color: '#fff', fontWeight: 'bold' },
 });
 
 export default TaskScreen;
