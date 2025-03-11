@@ -13,17 +13,17 @@ export const getCalendarDays = (date) => {
 
     for (let i = prevMonthDays; i > 0; i--) {
         const prevDate = new Date(year, month, -i + 1);
-        days.push({ date: prevDate, day: prevDate.getDate(), isCurrentMonth: false });
+        days.push({ date: prevDate, isCurrentMonth: false });
     }
 
     for (let i = 1; i <= totalDays; i++) {
         const currDate = new Date(year, month, i);
-        days.push({ date: currDate, day: i, isCurrentMonth: true, isToday: isToday(currDate) });
+        days.push({ date: currDate, isCurrentMonth: true, isToday: isToday(currDate) });
     }
 
     for (let i = 1; i <= nextMonthDays; i++) {
         const nextDate = new Date(year, month + 1, i);
-        days.push({ date: nextDate, day: i, isCurrentMonth: false });
+        days.push({ date: nextDate, isCurrentMonth: false });
     }
 
     return days;
